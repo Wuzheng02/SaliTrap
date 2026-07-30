@@ -1,10 +1,7 @@
 # SaliTrap: Revealing the Salience Bias of Large Language Models in Commonsense Reasoning
 
-This repository contains the official implementation of the paper:
+![SaliTrap Pipeline](https://github.com/Wuzheng02/SaliTrap/blob/main/pipeline.png)
 
-> **Would You Walk to the Car Wash? Revealing the Salience Bias of Large Language Models in Commonsense Reasoning**
-> Zheng Wu, Chenhao Xue, Shijie Zheng, Yijie Lu, Cheng Yang, Zhuosheng Zhang
-> AAAI 2027
 
 Large language models (LLMs) have learned to heavily prioritize explicit conditions provided in the input. We term the resulting vulnerability **Salience Bias**: models become easily hijacked by useless explicit distractors (e.g., numerical values), leading them to ignore the implicit physical or commonsense prerequisites of a task. To study this phenomenon, we construct **SaliTrap**, a high-quality benchmark spanning four trap dimensions (missing prerequisite, environmental mismatch, temporal/physiological violation, and rule mismatch), and show that this failure mode is overwhelmingly a matter of **knowledge suppression rather than knowledge absence**.
 
@@ -13,20 +10,6 @@ This repository provides:
 - The **data synthesis pipeline** used to construct SaliTrap (seed scaling, candidate generation/validation, iterative refinement, and stability retesting).
 - The **evaluation pipeline** used to benchmark LLMs on SaliTrap and reproduce the paper's tables.
 
-## Table of Contents
-
-- [Dataset](#dataset)
-- [Repository Structure](#repository-structure)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-  - [1. Seed Scaling](#1-seed-scaling)
-  - [2. Data Synthesis Pipeline](#2-data-synthesis-pipeline)
-  - [3. Stability Retest](#3-stability-retest)
-  - [4. Evaluation](#4-evaluation)
-  - [5. Generating LaTeX Tables](#5-generating-latex-tables)
-- [Configuration](#configuration)
-- [Citation](#citation)
-- [License](#license)
 
 ## Dataset
 
@@ -34,46 +17,6 @@ The SaliTrap benchmark (1,145 items across four trap dimensions) is released on 
 
 **Dataset**: [https://huggingface.co/datasets/TBD/SaliTrap](https://huggingface.co/datasets/TBD/SaliTrap) *(link will be updated upon release)*
 
-## Repository Structure
-
-```
-opensource_code/
-├── api_client.py                          # Unified LLM API client (OpenAI-compatible gateways)
-├── run_pipeline.py                        # Main entry point for the data synthesis pipeline
-├── v2_pipeline/
-│   └── phystrap_filtering_pipeline_v2.py  # Generator / Annealer / Checker / Solver-Judge core logic
-├── v3_registry/
-│   └── phystrap_v3_candidate_registry.py  # Per-seed candidate registry, routing, and refinement strategies
-├── seed_scaler/
-│   └── phystrap_seed_scaler.py            # LLM-assisted seed expansion from hand-written prototype seeds
-├── stability_retest/
-│   └── stability_retest.py                # Repeated-sampling stability retest for fixed accepted candidates
-└── eval/
-    ├── eval_phystrap.py                   # Main evaluation script (Solver + Judge over target models)
-    ├── gen_latex_table_sycophancy.py      # Generates the SCR / Sycophancy-Index LaTeX table
-    └── gen_latex_table_sycophancy_condsi.py  # Generates the SCR / Conditional-Sycophancy-Index LaTeX table
-```
-
-### Pipeline Overview
-
-```
-seed_scaler  --->  run_pipeline.py  --->  v3_registry  --->  v2_pipeline (Generator/Annealer/Checker)
-(seed pool)        (main entry)          (candidate           (candidate synthesis + Solver-Judge)
-                                          registry/routing)          |
-                                                                     v
-                                                      stability_retest (repeated-sampling check)
-                                                                     |
-                                                                     v
-                                                      outputs/results_full.json (SaliTrap benchmark)
-                                                                     |
-                                                                     v
-                                              eval/eval_phystrap.py  --->  eval/gen_latex_table_*.py
-                                              (benchmark target LLMs)      (LaTeX result tables)
-```
-
-`api_client.py` is a thin, unified LLM-calling layer used by every stage above; it is injected into each pipeline module at runtime (see `run_pipeline.py`).
-
-> **Note on prompt language.** The LLM prompt templates (system/user prompts for the Generator, Annealer, Checkers, Solver, and Judge) are kept in the **original Chinese** used to produce the results reported in the paper. Translating them would change the exact text sent to the models and could affect reproducibility of the reported numbers. All code comments, log messages, and identifiers have been translated to English.
 
 ## Installation
 
@@ -197,14 +140,5 @@ Before running any script against your own infrastructure, replace the placehold
 If you find this work useful, please cite:
 
 ```bibtex
-@inproceedings{wu2027salitrap,
-  title     = {Would You Walk to the Car Wash? Revealing the Salience Bias of Large Language Models in Commonsense Reasoning},
-  author    = {Wu, Zheng and Xue, Chenhao and Zheng, Shijie and Lu, Yijie and Yang, Cheng and Zhang, Zhuosheng},
-  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
-  year      = {2027}
-}
+
 ```
-
-## License
-
-This project is released under the [MIT License](LICENSE).
