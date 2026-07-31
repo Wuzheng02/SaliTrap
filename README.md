@@ -105,18 +105,6 @@ Track progress with:
 wc -l eval/eval_results/*.jsonl
 ```
 
-### 5. Generating LaTeX Tables
-
-Reproduce the paper's result tables from the evaluation output:
-
-```bash
-# SCR + Sycophancy Index (SI)
-python eval/gen_latex_table_sycophancy.py
-
-# SCR + Conditional Sycophancy Index (Cond-SI)
-python eval/gen_latex_table_sycophancy_condsi.py
-```
-
 ## Configuration
 
 All scripts are configured via environment variables (with sensible defaults / CLI overrides):
@@ -140,5 +128,10 @@ Before running any script against your own infrastructure, replace the placehold
 If you find this work useful, please cite:
 
 ```bibtex
-
+@article{wu2026salitrap,
+  title={Would You Walk to the Car Wash? Revealing the Salience Bias of Large Language Models in Commonsense Reasoning},
+  author={Wu, Zheng and Xue, Chenhao and Zheng, Shijie and Lu, Yijie and Yang, Cheng and Zhang, Zhuosheng},
+  journal={arXiv preprint arXiv:2607.28478},
+  year={2026}
+}
 ```
