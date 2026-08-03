@@ -15,7 +15,7 @@ This repository provides:
 
 The SaliTrap benchmark (1,145 items across four trap dimensions) is released on Hugging Face:
 
-**Dataset**: [https://huggingface.co/datasets/TBD/SaliTrap](https://huggingface.co/datasets/TBD/SaliTrap) *(link will be updated upon release)*
+**Dataset**: [https://huggingface.co/datasets/wuuuuuz/SaliTrap](https://huggingface.co/datasets/wuuuuuz/SaliTrap)
 
 
 ## Installation
