@@ -128,7 +128,7 @@ Before running any script against your own infrastructure, replace the placehold
 If you find this work useful, please cite:
 
 ```bibtex
-@article{wu2026salitrap,
+@article{wu2026would,
   title={Would You Walk to the Car Wash? Revealing the Salience Bias of Large Language Models in Commonsense Reasoning},
   author={Wu, Zheng and Xue, Chenhao and Zheng, Shijie and Lu, Yijie and Yang, Cheng and Zhang, Zhuosheng},
   journal={arXiv preprint arXiv:2607.28478},
